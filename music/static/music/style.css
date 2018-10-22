@@ -1,0 +1,34 @@
+body {
+    background: white url("images/subtlenet2_@2X.png");
+}
+
+div.container-fluid {
+    background-color: black;
+}
+
+a.navbar-logo {
+    color: white;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+a:hover {
+    color: yellow;
+}
+
+div#wholePage {
+    margin: 16px;
+}
+
+th, td {
+    text-align: center;
+}
+
+th {
+    width: 150px;
+}
+
+#albumArt {
+    float: left;
+    margin-right: 10px;
+}

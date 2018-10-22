@@ -21,7 +21,7 @@ app_name = 'music'
 
 urlpatterns = [
     # /music/
-    path('', views.index, name=''),
+    path('', views.index, name='index'),
 
     # /music/<albumID>/favourite
     path('<int:albumID>/', views.detail, name='detail'),
