@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <img src="{{ album.albumImage }}">
+
+    <h1>{{ album.albumTitle }}</h1>
+    <h3>{{ album.artist }}</h3>
+
+    {% if errorMessage %}
+        <p>{{ errorMessage }}</p>
+    {% endif %}
+
+    <!-- Where to send-->
+    <form action="{% url 'music:favourite' album.id %}" method="post">
+        {% csrf_token %} <!--Security-->
+        {% for song in album.song_set.all %}
+            <input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}"/>
+
+            <label for="song{{ forloop.counter }}">
+                {{ song.songTitle }}
+
+                {% if song.isFavourite %}
+                    <img src="https://cdn2.iconfinder.com/data/icons/diagona/icon/16/031.png" />
+                {% endif %}
+            </label><br>
+
+        {% endfor %}
+        <input type="submit" value="Favourite">
+    </form>
+
+    {% comment %}<ul>
+        {% for song in album.song_set.all %}
+        <li>{{ song.songTitle }}{{ song.fileType }}</li>
+        {% endfor %}
+    </ul>{% endcomment %}
+</body>
+</html>
