@@ -18,30 +18,18 @@
         <p>{{ errorMessage }}</p>
     {% endif %}
 
-    <!-- Where to send-->
-    <form id="favouriteSongs" action="{% url 'music:favourite' album.id %}" method="post">
-        {% csrf_token %} <!--Security-->
-        {% for song in album.song_set.all %}
-            <input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}"/>
+    <!-- Where to send album data to -->
+    {% csrf_token %} <!--Security-->
+    {% for song in album.song_set.all %}
+        <input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}"/>
 
-            <label for="song{{ forloop.counter }}">
-                {{ song.songTitle }}
+        <label for="song{{ forloop.counter }}">
+            {{ song.songTitle }}
+        </label><br>
 
-                {% if song.isFavourite %}
-                    <img src="https://cdn2.iconfinder.com/data/icons/diagona/icon/16/031.png" />
-                {% endif %}
-            </label><br>
-
-        {% endfor %}
-        <input type="submit" value="Favourite">
-    </form>
+    {% endfor %}
 
 </div>
-    {% comment %}<ul>
-        {% for song in album.song_set.all %}
-        <li>{{ song.songTitle }}{{ song.fileType }}</li>
-        {% endfor %}
-    </ul>{% endcomment %}
 {% endblock %}
 </body>
 </html>

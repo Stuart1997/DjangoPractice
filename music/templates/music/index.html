@@ -14,7 +14,7 @@
 
 <p>Albums</p>
 
-{% if allAlbums %}
+{% if album_list %}
     <table>
         <tr>
             <th>Album ID</th>
@@ -23,7 +23,7 @@
             <th>Genre</th>
             <th>Detail Page</th>
         </tr>
-        {% for album in allAlbums %}
+        {% for album in album_list %}
            <tr>
             <td>{{ album.id }}</td>
             <td>{{ album.albumTitle }}</td>

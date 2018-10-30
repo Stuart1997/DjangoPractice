@@ -17,7 +17,7 @@ div.container-fluid {
 
 .navbar-brand {
     font-family: 'Aroly', cursive;
-    text-decoration-color: red;
+    color: red;
 }
 
 p {
@@ -42,4 +42,8 @@ th {
 #albumArt {
     float: left;
     margin-right: 10px;
+}
+
+div.inputForm {
+    margin-left: 100px;
 }

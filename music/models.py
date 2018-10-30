@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 # Each album created will give it an ID
@@ -7,6 +8,11 @@ class Album(models.Model):  # Every model inherits from this
     albumTitle = models.CharField(max_length=100)
     genre = models.CharField(max_length=100)
     albumImage = models.CharField(max_length=1000)
+
+    #Whenever an album is added, it'll give it a pk, and go to detail view
+    def get_absolute_url(self):
+        return reverse('music:detail', kwargs={'pk': self.pk})
+
 
     def __str__(self):  # String representation of the object
         return self.albumTitle + " by " + self.artist

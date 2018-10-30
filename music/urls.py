@@ -21,11 +21,13 @@ app_name = 'music'
 
 urlpatterns = [
     # /music/
-    path('', views.index, name='index'),
+    path('', views.IndexPage.as_view(), name='index'),
 
     # /music/<albumID>/favourite
-    path('<int:albumID>/', views.detail, name='detail'),
+    path('<pk>/', views.DetailPage.as_view(), name='detail'),
 
-    # /music/<albumID>/favourite
-    path('<int:albumID>/favourite', views.favourite, name='favourite'),
+    path('album/add', views.AlbumCreate.as_view(), name='album-add'),
+
+    # # /music/<albumID>/favourite
+    # path('<int:albumID>/favourite', views.favourite, name='favourite'),
 ]

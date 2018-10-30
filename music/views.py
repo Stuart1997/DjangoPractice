@@ -1,35 +1,59 @@
 from django.shortcuts import render
-
-# Create your views here.
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+#Create your views here.
 from django.shortcuts import render, get_object_or_404
 from .models import Album, Song
 
-
-def index(request):
-    allAlbums = Album.objects.all()
-
-    return render(request, 'music/index.html', {'allAlbums': allAlbums})
+from django.views import generic
+from .models import Album
 
 
-def detail(request, albumID):
-    album = get_object_or_404(Album, pk=albumID)
+#Displays all results as a listview on the index page
+class IndexPage(generic.ListView):
+    template_name = 'music/index.html'
+    context_object_name = 'album_list'
 
-    return render(request, 'music/detail.html', {'album': album})
+    def get_queryset(self):
+        return Album.objects.all()
 
 
-def favourite(request, albumID):
-    album = get_object_or_404(Album, pk=albumID)
-    try:
-        selectedSong = album.song_set.get(pk=request.POST['song'])
-    except(KeyError, Song.DoesNotExist):
-        return render(request, 'music/detail.html', {
-            'album': album,
-            'errorMessage': "Didn't select a valid song"
-        })
-    else:
-        selectedSong.isFavourite = True
-        selectedSong.save()
-        return render(request, 'music/detail.html', {'album': album})
+#Displays all information about a single album on a detail page
+class DetailPage(generic.DetailView):
+    model = Album
+    template_name = 'music/detail.html'
+
+
+#What fields need to be filled out in the form?
+class AlbumCreate(CreateView):
+    model = Album
+    fields = ['artist', 'albumTitle', 'genre', 'albumImage']
+
+
+# def index(request):
+#     allAlbums = Album.objects.all()
+#
+#     return render(request, 'music/index.html', {'allAlbums': allAlbums})
+#
+#
+# def detail(request, albumID):
+#     album = get_object_or_404(Album, pk=albumID)
+#
+#     return render(request, 'music/detail.html', {'album': album})
+#
+#
+# def favourite(request, albumID):
+#     album = get_object_or_404(Album, pk=albumID)
+#     try:
+#         selectedSong = album.song_set.get(pk=request.POST['song'])
+#     except(KeyError, Song.DoesNotExist):
+#         return render(request, 'music/detail.html', {
+#             'album': album,
+#             'errorMessage': "Didn't select a valid song"
+#         })
+#     else:
+#         selectedSong.isFavourite = True
+#         selectedSong.save()
+#         return render(request, 'music/detail.html', {'album': album})
 
 
 # Template way without shortcuts
