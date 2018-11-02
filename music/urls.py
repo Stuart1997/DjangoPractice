@@ -23,10 +23,19 @@ urlpatterns = [
     # /music/
     path('', views.IndexPage.as_view(), name='index'),
 
+    path('register/', views.UserFormView.as_view(), name='register'),
+
     # /music/<albumID>/favourite
     path('<pk>/', views.DetailPage.as_view(), name='detail'),
 
+    # /music/album/add
     path('album/add', views.AlbumCreate.as_view(), name='album-add'),
+
+    # /music/album/<albumID>
+    path('album/<pk>', views.AlbumUpdate.as_view(), name='album-update'),
+
+    # /music/album/<albumID>/delete
+    path('album/<pk>/delete', views.AlbumDelete.as_view(), name='album-delete'),
 
     # # /music/<albumID>/favourite
     # path('<int:albumID>/favourite', views.favourite, name='favourite'),

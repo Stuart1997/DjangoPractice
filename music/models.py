@@ -7,7 +7,7 @@ class Album(models.Model):  # Every model inherits from this
     artist = models.CharField(max_length=100)   # Declare what the type of this field is
     albumTitle = models.CharField(max_length=100)
     genre = models.CharField(max_length=100)
-    albumImage = models.CharField(max_length=1000)
+    albumImage = models.FileField()
 
     #Whenever an album is added, it'll give it a pk, and go to detail view
     def get_absolute_url(self):

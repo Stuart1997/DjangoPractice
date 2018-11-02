@@ -12,7 +12,7 @@
 
     <h1>{{ album.albumTitle }}</h1>
     <h3>{{ album.artist }}</h3>
-    <img id="albumArt" src="{{ album.albumImage }}">
+    <img id="albumArt" src="{{ album.albumImage.url }}">
 
     {% if errorMessage %}
         <p>{{ errorMessage }}</p>
