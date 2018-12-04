@@ -12,26 +12,28 @@
 {%  block body %}
 <div id="wholePage">
 
-<p>Albums</p>
-
 {% if album_list %}
-    <table>
-        <tr>
-            <th>Album ID</th>
-            <th>Album</th>
-            <th>Artist</th>
-            <th>Genre</th>
-            <th>Detail Page</th>
-        </tr>
-        {% for album in album_list %}
-           <tr>
-            <td>{{ album.id }}</td>
-            <td>{{ album.albumTitle }}</td>
-            <td>{{ album.artist }}</td>
-            <td>{{ album.genre }}</td>
-            <td><a href="{% url 'music:detail' album.id %}">Click for more details</a></td>
+<table class="table">
+    <!--Sets up headings-->
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Album</th>
+      <th scope="col">Artist</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Detail Page</th>
+      {% comment %}<th scope="col">Edit</th>
+      <th scope="col">Delete</th>{% endcomment %}
+    </tr>
+    </thead>
 
-           <td>
+    {% for album in album_list %}
+    <tbody>
+    <tr>
+        <td>{{ album.albumTitle }}</td>
+        <td>{{ album.artist }}</td>
+        <td>{{ album.genre }}</td>
+        <td><a href="{% url 'music:detail' album.id %}">Click for more details</a></td>
+        {% comment %}<td>
              <form action="{% url 'music:album-delete' album.id %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <input type="hidden" name="album_id" value="{{ album.id }}" />
@@ -48,10 +50,12 @@
                     <span class="glyphicon glyphicon-trash"></span>
                 </button>
              </form>
-            </td>
+            </td>{% endcomment %}
         </tr>
-        {% endfor %}
-    </table>
+    {% endfor %}
+    </tbody>
+</table>
+
 
 {% else %}
     <p>No albums found!</p>

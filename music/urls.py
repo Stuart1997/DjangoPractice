@@ -16,14 +16,13 @@ Including another URLconf
 
 from django.urls import path
 from . import views
+from django.contrib.auth.views import auth_logout
 
 app_name = 'music'
 
 urlpatterns = [
     # /music/
     path('', views.IndexPage.as_view(), name='index'),
-
-    path('register/', views.UserFormView.as_view(), name='register'),
 
     # /music/<albumID>/favourite
     path('<pk>/', views.DetailPage.as_view(), name='detail'),
@@ -36,6 +35,7 @@ urlpatterns = [
 
     # /music/album/<albumID>/delete
     path('album/<pk>/delete', views.AlbumDelete.as_view(), name='album-delete'),
+
 
     # # /music/<albumID>/favourite
     # path('<int:albumID>/favourite', views.favourite, name='favourite'),
